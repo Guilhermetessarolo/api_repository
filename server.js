@@ -3,9 +3,9 @@ const axios = require('axios');
 const app = express();
 
 // Configurações do Exact Online
-const clientID = 'SEU_CLIENT_ID';  // Substitua pelo seu Client ID
-const clientSecret = 'SEU_CLIENT_SECRET';  // Substitua pelo seu Client Secret
-const redirectUri = 'https://seuprojeto.vercel.app/callback';  // Atualizaremos após o deploy
+const clientID = '9543c370-8b88-4b15-814e-00906ff2ceef';  // Substitua pelo seu Client ID
+const clientSecret = '4nsNMpyZSLrA';  // Substitua pelo seu Client Secret
+const redirectUri = 'https://api-repository-gamma.vercel.app/callback';  // Atualizaremos após o deploy
 const authUrl = 'https://start.exactonline.nl/api/oauth2/auth';
 const tokenUrl = 'https://start.exactonline.nl/api/oauth2/token';
 
