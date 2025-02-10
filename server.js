@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
 
 // Callback para capturar o código de autorização
 app.get('/callback', async (req, res) => {
-    console.log('Parâmetros recebidos no callback:', req.query);  // Log para verificar os parâmetros recebidos
+    console.log('Parâmetros recebidos no callback:', req.query);  // Log para ver os parâmetros recebidos
 
     const authCode = req.query.code;
 
@@ -47,10 +47,11 @@ app.get('/callback', async (req, res) => {
             <p><strong>Refresh Token:</strong> ${refreshToken}</p>
         `);
     } catch (error) {
-        console.error('Erro ao obter o token:', error.response?.data || error.message);  // Log para verificar detalhes do erro
+        console.error('Erro ao obter o token:', error.response?.data || error.message);  // Log do erro
         res.send(`Erro ao obter o token de acesso: ${error.response?.data?.error_description || error.message}`);
     }
 });
+
 
 // Inicializando o servidor
 module.exports = app;
