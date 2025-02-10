@@ -9,9 +9,9 @@ const redirectUri = 'https://api-repository-gamma.vercel.app/callback';  // Veri
 const authUrl = 'https://start.exactonline.nl/api/oauth2/auth';
 const tokenUrl = 'https://start.exactonline.nl/api/oauth2/token';
 
-// Rota inicial: redireciona para a página de login do Exact Online
+// Rota inicial: redireciona para a página de login do Exact Online (sem state)
 app.get('/', (req, res) => {
-    const url = `${authUrl}?client_id=${clientID}&redirect_uri=${redirectUri}&response_type=code&state=xyz123`;
+    const url = `${authUrl}?client_id=${clientID}&redirect_uri=${redirectUri}&response_type=code`;
     console.log('URL de autenticação gerada:', url);  // Log para verificar a URL gerada
     res.redirect(url);
 });
@@ -28,6 +28,15 @@ app.get('/callback', async (req, res) => {
 
     try {
         // Troca o código de autorização pelo token de acesso
+        console.log('Enviando solicitação POST com os parâmetros:');
+        console.log({
+            grant_type: 'authorization_code',
+            code: authCode,
+            redirect_uri: redirectUri,
+            client_id: clientID,
+            client_secret: clientSecret
+        });
+
         const response = await axios.post(tokenUrl, null, {
             params: {
                 grant_type: 'authorization_code',
@@ -51,7 +60,6 @@ app.get('/callback', async (req, res) => {
         res.send(`Erro ao obter o token de acesso: ${error.response?.data?.error_description || error.message}`);
     }
 });
-
 
 // Inicializando o servidor
 module.exports = app;
