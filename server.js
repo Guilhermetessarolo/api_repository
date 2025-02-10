@@ -5,23 +5,25 @@ const app = express();
 // Configurações do Exact Online
 const clientID = '9543c370-8b88-4b15-814e-00906ff2ceef';  // Substitua pelo seu Client ID
 const clientSecret = '4nsNMpyZSLrA';  // Substitua pelo seu Client Secret
-const redirectUri = 'https://api-repository-gamma.vercel.app/callback';  // Atualizaremos após o deploy
+const redirectUri = 'https://api-repository-gamma.vercel.app/callback';  // Verifique se está igual ao registrado no Exact Online
 const authUrl = 'https://start.exactonline.nl/api/oauth2/auth';
 const tokenUrl = 'https://start.exactonline.nl/api/oauth2/token';
 
 // Rota inicial: redireciona para a página de login do Exact Online
 app.get('/', (req, res) => {
     const url = `${authUrl}?client_id=${clientID}&redirect_uri=${redirectUri}&response_type=code&state=xyz123`;
+    console.log('URL de autenticação gerada:', url);  // Log para verificar a URL gerada
     res.redirect(url);
 });
 
 // Callback para capturar o código de autorização
 app.get('/callback', async (req, res) => {
+    console.log('Parâmetros recebidos no callback:', req.query);  // Log para verificar os parâmetros recebidos
+
     const authCode = req.query.code;
 
     if (!authCode) {
-        res.send('Erro: Código de autorização não foi recebido.');
-        return;
+        return res.send('Erro: Código de autorização não foi recebido.');
     }
 
     try {
@@ -45,7 +47,8 @@ app.get('/callback', async (req, res) => {
             <p><strong>Refresh Token:</strong> ${refreshToken}</p>
         `);
     } catch (error) {
-        res.send(`Erro ao obter o token de acesso: ${error.message}`);
+        console.error('Erro ao obter o token:', error.response?.data || error.message);  // Log para verificar detalhes do erro
+        res.send(`Erro ao obter o token de acesso: ${error.response?.data?.error_description || error.message}`);
     }
 });
 
