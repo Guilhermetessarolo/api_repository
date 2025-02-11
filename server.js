@@ -3,9 +3,9 @@ const axios = require('axios');
 const app = express();
 
 // Configurações do Exact Online
-const clientID = '9543c370-8b88-4b15-814e-00906ff2ceef';  // Substitua pelo seu Client ID
-const clientSecret = '4nsNMpyZSLrA';  // Substitua pelo seu Client Secret
-const redirectUri = 'https://api-repository-gamma.vercel.app/callback';  // Verifique se está igual ao registrado no Exact Online
+const clientID = '6de41c0a-be15-4256-b629-02b71bf58e1b';  // Substitua pelo seu Client ID
+const clientSecret = 'NiLnpfULaUsp';  // Substitua pelo seu Client Secret
+const redirectUri = 'https://api-repository-henna.vercel.app/callback';  // Verifique se está igual ao registrado no Exact Online
 const authUrl = 'https://start.exactonline.nl/api/oauth2/auth';
 const tokenUrl = 'https://start.exactonline.nl/api/oauth2/token';
 
