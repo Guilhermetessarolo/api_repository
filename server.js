@@ -11,10 +11,11 @@ const tokenUrl = 'https://start.exactonline.nl/api/oauth2/token';
 
 // Rota inicial: redireciona para a página de login do Exact Online
 app.get('/', (req, res) => {
-    const url = `${authUrl}?client_id=${clientID}&redirect_uri=${redirectUri}&response_type=code`;
-    console.log('URL de autenticação gerada:', url);  // Log para verificar a URL gerada
+    const url = `${authUrl}?client_id=${clientID}&redirect_uri=${redirectUri}&response_type=code&scope=restapi`;
+    console.log('URL de autenticação gerada:', url);
     res.redirect(url);
 });
+
 
 // Callback para capturar o código de autorização
 app.get('/callback', async (req, res) => {
